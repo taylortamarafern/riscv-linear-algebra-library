@@ -17,22 +17,6 @@ vector3: .word 0,0,0,
     #for some reason only adds the first number in
     #vector2 to the entirety of vector1
     
-addLoop:
-	beq t2, s0, endLoop
-	lw a1, 0(t0)
-    lw a2, 0(t1)
-    sub a1, a1, a2
-    li a0, 1
-    ecall
-    li a1, ','
-    li a2, ','
-    li a0, 11
-    addi t0, t0, 4
-    addi t1, t1, 4
-    addi t2, t2, 1
-    ecall
-    j addLoop
-    
 subLoop:
 	beq t2, s0, endLoop
 	lw a1, 0(t0)
@@ -44,6 +28,7 @@ subLoop:
     li a2, ','
     li a0, 11
     addi t0, t0, 4
+    addi t1, t1, 4
     addi t2, t2, 1
     ecall
     j subLoop
