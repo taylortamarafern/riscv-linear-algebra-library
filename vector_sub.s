@@ -1,5 +1,6 @@
 #Project: CSCI 374 Basic Linear Algebra Library in Risc-V
 #Description: vector integer subtraction
+#Contributers: Dylan Newstrum, Taylor Fern, & Tyler Ferron
 .data
 n: .word 3
 vector1: .word 5,9,7,
