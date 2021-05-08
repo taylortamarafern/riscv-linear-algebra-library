@@ -1,0 +1,126 @@
+#adapted from MatRISC: A RISC Multiprocessor for Matrix Applications
+#Written by Andrew James Beaumont-Smith
+
+
+#definitions:
+#
+#N1, N2, N3 = matrix sizes 
+#p = physical array
+#V = virtual factor
+#s = DM size in operands in each PE
+#S = register size (S = sp)
+
+
+
+#matrix add psudeocode
+#############################################################
+#this is the X matrix, the number of partitions down
+ceil.N1 = CEIL(N1(/V*p)) 
+
+#this is Y matrix, the number of partitions across
+ceil.N2 = CEIL(N2/V*p))
+
+#do partitions across
+for k in 1 to ceil.N2 
+    #do partitions down
+    for j in 1 to ceil_N1
+        #do the virtual factors across first
+        for t in 1 to V 
+            #do the virtual factors down
+            for h in 1 to V
+                Z'(j,k,t,h) = X'(j,k,t,h) + Y'(j,k,t,h)
+                write Z'
+            end loop
+        end loop
+    end loop
+end loop
+
+
+#matrix subtraction pseudocode
+##############################################################
+#this is the X matrix, the number of partitions down
+ceil.N1 = CEIL(N1(/V*p)) 
+
+#this is Y matrix, the number of partitions across
+ceil.N2 = CEIL(N2/V*p))
+
+#do partitions across
+for k in 1 to ceil.N2 
+    #do partitions down
+    for j in 1 to ceil_N1
+        #do the virtual factors across first
+        for t in 1 to V 
+            #do the virtual factors down
+            for h in 1 to V
+                Z'(j,k,t,h) = X'(j,k,t,h) - Y'(j,k,t,h)
+                write Z'
+            end loop
+        end loop
+    end loop
+end loop
+
+
+#basic matrix multiplication pseudocode
+#############################################################
+#count across Y
+for k in 1 to N3
+    #for each Y, count across X
+    for j in 1 to N2
+        read Y(j,k)
+        #do one element of the inner product
+        for i in 1 to N1
+
+            #for each result element
+            read X(i,j)
+            read Z(i,k)
+            #multiply and accumulate
+            Z(i,k) = Z(i,k) + X (i,j) * Y(j,k)
+            write Z(i,k)
+        end loop
+        write Z(i,k)
+    end loop
+end loop
+
+#operand Y is only read every N1 cycles
+#Z is the result
+
+
+#matrix multiplication psudeocode: 
+#computing Z(1: N1, 1: N3) = X(1:N1, 1:N2) * Y(1:N2, 1:N3)
+#############################################################
+#X matrix, number of partitions down
+ceil.N1 = CEIL(N1(/V*p))
+#Y matriz, number of partitions across
+ceil.N2 = CEIL(N3/V*p)) 
+#number of "virtual" partiions left over (N1)
+rem.N1 = CEIL(MOD(N1,(V*p))/p)
+#number of "virtual" partitions left over(N3)
+rem.N3 - CEIL(MOD(N3,(V*p))/p)
+
+#partitions across Y
+for k in 1 to ceil.N3
+    #partitions down X
+    for j in 1 to ceil.N1  
+        #vectors across X and down Y
+        for i in 1 to N2
+            #compute the last partitions of Z
+            if k = ceil.N3 && j = ceil.N1
+                #do partitions down X and across Y
+                for h in 1 to maxrem.N1, rem.N3
+                    Z'(j,k,h) = Z'(j,k,h) + X'(i-1+t,j,h) * Y'(k,i-1+t,h)
+                end loop
+            else
+                #now, do the virtual factor partitions down X, across Y
+                for h in 1 to V
+                    Z'(j,k,h) = Z'(j,k,h) + X'(i-1+t,j,h) * Y'(k,i-1+t,h)
+                end loop
+            end if
+        end loop
+        write Z'
+    end loop
+end loop
+
+
+
+
+    
