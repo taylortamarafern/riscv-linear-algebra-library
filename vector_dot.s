@@ -1,3 +1,7 @@
+#Project: CSCI 374 Basic Linear Algebra Library in Risc-V
+#Description: Vector Dot Product operation
+#Contributers: Dylan Newstrum, Taylor Fern, & Tyler Ferron
+
 .data
 n: .word 3
 vector1: .word 4,3,1,
@@ -15,8 +19,7 @@ vector3: .word 0,0,0,
     mv t3, s3
     li t2, 0
     li t4, 0
-    #for some reason only adds the first number in
-    #vector2 to the entirety of vector1
+
     
 dotProduct:
 	beq t2, s0, endLoop
