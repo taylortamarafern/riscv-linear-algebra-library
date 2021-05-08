@@ -1,5 +1,7 @@
 #Project: CSCI 374 Basic Linear Algebra Library in Risc-V
-#Description: Vector Division
+
+
+#Description: vector integer division
 #Contributers: Dylan Newstrum, Taylor Fern, & Tyler Ferron
 
 .data

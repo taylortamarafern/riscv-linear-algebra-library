@@ -1,5 +1,6 @@
 #Project: CSCI 374 Basic Linear Algebra Library in Risc-V
-#Description: Vector Dot Product operation
+
+#Description: vector integer dot product
 #Contributers: Dylan Newstrum, Taylor Fern, & Tyler Ferron
 
 .data
