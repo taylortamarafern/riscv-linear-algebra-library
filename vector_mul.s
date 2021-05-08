@@ -1,5 +1,6 @@
 #Project: CSCI 374 Basic Linear Algebra Library in Risc-V
-#Description: Vector Multiplication
+
+#Description: vector integer multiplication
 #Contributers: Dylan Newstrum, Taylor Fern, & Tyler Ferron
 
 .data
