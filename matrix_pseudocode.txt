@@ -1,3 +1,7 @@
+#Project: CSCI 374 Basic Linear Algebra Library in Risc-V
+#Description: matrix integer multiplication pseudocode
+#Date: 5/7/2021
+
 #adapted from MatRISC: A RISC Multiprocessor for Matrix Applications
 #Written by Andrew James Beaumont-Smith
 
